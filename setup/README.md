@@ -103,4 +103,8 @@ $ kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.ya
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+Son versiyonu için 
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
 ```
