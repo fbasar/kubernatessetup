@@ -84,7 +84,7 @@ $ sudo apt-mark hold kubelet kubeadm kubectl
 
 ```
 $ sudo kubeadm config images pull
-
+$ sudo swapoff -a
 $ sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
 ```
 
