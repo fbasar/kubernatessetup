@@ -98,3 +98,9 @@ $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 $ kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 $ kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 ```
+
+**5:** Eğer node'lar ayaklanmaz ise aşağıdaki kodu çalıştırmak gerekecektir.
+
+```
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+```
