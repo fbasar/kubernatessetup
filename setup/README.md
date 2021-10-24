@@ -91,6 +91,8 @@ $ sudo vi /etc/fstab
 
 **4:** MasterNode üzerinde aşağıki işlemler yapılacaktır.
 
+Aşağıdaki komutlar master node üzerinden çalıştırılması gerekiyor.
+
 ```
 sudo kubeadm config images pull
 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
@@ -99,11 +101,10 @@ sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-addres
 
 sudo kubeadm config images pull -> Bu komut ile birlikte kubernetes asıl bileşenleri kuruluyor. 
 
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip> 
+Yukarıdaki komuttaki IP bölümüne master node'un ip bilgileri girilmesi gerekiyor. 
   
-  
-
-Kendi bilgisayarımızda yapılacak işlemler aşağıdaki gibi olacaktır. 
+init komutu çalıştırıldıktan sonra aşağıdaki işlemler yapılabilecektir. 
 
 ```
 mkdir -p $HOME/.kube
@@ -111,12 +112,19 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
+  
+**5:** Worker node larda çalıştırılacak komut
+  
+  4. bölümdeki çalıştırılan kubeadm init komutu ile oluşacak olan kubeadm join komutu node'larda çalıştırılacaktır. kubeadm join komutu control-plane için farklı worker node için farklı olarak verilmektedir. 
+  
+  
+
 ```
 kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 ```
 
-**5:** Eğer node'lar ayaklanmaz ise aşağıdaki kodu çalıştırmak gerekecektir.
+**6:** Eğer node'lar ayaklanmaz ise aşağıdaki kodu çalıştırmak gerekecektir.
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
@@ -127,7 +135,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 ```
 
 
-**6:** LoadBalancer için MetalLB'yi kullanacağız
+**7:** LoadBalancer için MetalLB'yi kullanacağız
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.10.2/manifests/namespace.yaml
