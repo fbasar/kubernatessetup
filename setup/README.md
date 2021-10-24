@@ -103,6 +103,59 @@ sudo kubeadm config images pull -> Bu komut ile birlikte kubernetes asıl bileş
 
 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip> 
 Yukarıdaki komuttaki IP bölümüne master node'un ip bilgileri girilmesi gerekiyor. 
+
+**kubeadm init komutunda aşağıdaki hata çıkarsa yapılacaklar**
+Hata 1:  
+  How to fix timeout at Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
+  
+  1) Reset cluster
+```
+sudo kubeadm reset
+rm -rf .kube/
+sudo rm -rf /etc/kubernetes/
+sudo rm -rf /var/lib/kubelet/
+sudo rm -rf /var/lib/etcd
+```
+  2) put SELinux to permissive mode
+```
+setenforce 0 
+```
+  
+3) enable net.bridge.bridge-nf-call-ip6tables and net.bridge.bridge-nf-call-iptables
+```
+sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+modprobe br_netfilter 
+
+cat <<EOF >  /etc/sysctl.d/kube.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
+```
+
+4) Add Kube repo fo kubeadm, kubelet, kubectl components:
+```
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kube*
+EOF
+```
+  5) Install ans start Kube components ans services:
+```
+yum update && yum upgrade && yum install -y docker kubelet kubeadm kubectl --disableexcludes=kubernetes
+systemctl start docker kubelet && systemctl enable docker kubelet
+6)kubeadm init
+
+kubeadm init --pod-network-cidr=10.244.0.0/16 -v=9
+```
+  
+  
   
 init komutu çalıştırıldıktan sonra aşağıdaki işlemler yapılabilecektir. 
 
