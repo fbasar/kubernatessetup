@@ -31,8 +31,10 @@ Run sudo kubeadm init --config kubeadm-config.yaml --upload-certs on this node.
 Write the output join commands that are returned to a text file for later use.
 
 Apply the CNI plugin of your choice. The given example is for Weave Net:
-
+```
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+```
+
 Steps for the rest of the control plane nodes
 The steps are the same as for the stacked etcd setup:
 
