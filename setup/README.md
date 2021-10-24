@@ -98,6 +98,7 @@ sudo kubeadm config images pull
 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip> --upload-certs
 ```
 
+--upload-certs -> master node u high avaiblity için gerekiyor. Eğer yazılmazsa high avaiblity aktif hale gelmiyor.
 
 sudo kubeadm config images pull -> Bu komut ile birlikte kubernetes asıl bileşenleri kuruluyor. 
 
