@@ -88,6 +88,15 @@ sudo swapoff -a
 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
 ```
 
+Swap'ı tam kapatmak için aşağıdaki gibi işlem yapılması gerekiyor.
+
+$ sudo swapoff -a
+// swap alanı geçici olarak devre dışı kalacaktır.
+$ sudo vi /etc/fstab 
+// Bu dosyayı açtığımızda /swapfile şeklinde bir satır var ise bu alanı yorum alanı yapmamız gerekmektedir.
+
+
+
 ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
