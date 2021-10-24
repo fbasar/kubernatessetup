@@ -80,22 +80,30 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
-**4:** kubernetes cluster kurulumu (Sadece Cluster'ın kurulacağı bölümde yazılacak)
-
-```
-sudo kubeadm config images pull
-sudo swapoff -a
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
-```
 
 Swap'ı tam kapatmak için aşağıdaki gibi işlem yapılması gerekiyor.
-
+```
 $ sudo swapoff -a
 // swap alanı geçici olarak devre dışı kalacaktır.
 $ sudo vi /etc/fstab 
 // Bu dosyayı açtığımızda /swapfile şeklinde bir satır var ise bu alanı yorum alanı yapmamız gerekmektedir.
+```
+
+**4:** MasterNode üzerinde aşağıki işlemler yapılacaktır.
+
+```
+sudo kubeadm config images pull
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
+```
 
 
+sudo kubeadm config images pull -> Bu komut ile birlikte kubernetes asıl bileşenleri kuruluyor. 
+
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
+  
+  
+
+Kendi bilgisayarımızda yapılacak işlemler aşağıdaki gibi olacaktır. 
 
 ```
 mkdir -p $HOME/.kube
