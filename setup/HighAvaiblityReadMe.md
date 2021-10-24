@@ -26,7 +26,12 @@ Replace the following variables in the config template with the appropriate valu
 
 The following steps are similar to the stacked etcd setup:
 
-Run sudo kubeadm init --config kubeadm-config.yaml --upload-certs on this node.
+Run 
+```
+sudo kubeadm init --config kubeadm-config.yaml --upload-certs
+```
+
+on this node.
 
 Write the output join commands that are returned to a text file for later use.
 
