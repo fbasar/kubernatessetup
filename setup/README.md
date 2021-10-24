@@ -95,13 +95,13 @@ Aşağıdaki komutlar master node üzerinden çalıştırılması gerekiyor.
 
 ```
 sudo kubeadm config images pull
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip>
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip> --upload-certs
 ```
 
 
 sudo kubeadm config images pull -> Bu komut ile birlikte kubernetes asıl bileşenleri kuruluyor. 
 
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip> 
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<ip> --control-plane-endpoint=<ip> --upload-certs
 Yukarıdaki komuttaki IP bölümüne master node'un ip bilgileri girilmesi gerekiyor. 
 
 **kubeadm init komutunda aşağıdaki hata çıkarsa yapılacaklar**
