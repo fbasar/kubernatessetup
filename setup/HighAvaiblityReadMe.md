@@ -42,8 +42,10 @@ Don't forget that the decryption key from --certificate-key expires after two ho
 Common tasks after bootstrapping control plane
 Install workers
 Worker nodes can be joined to the cluster with the command you stored previously as the output from the kubeadm init command:
-
+```
 sudo kubeadm join 192.168.0.200:6443 --token 9vr73a.a8uxyaju799qwdjv --discovery-token-ca-cert-hash sha256:7c2e69131a36ae2a042a339b33381c6d0d43887e2de83720eff5359e26aec866
+```
+
 Manual certificate distribution
 If you choose to not use kubeadm init with the --upload-certs flag this means that you are going to have to manually copy the certificates from the primary control plane node to the joining control plane nodes.
 
@@ -52,19 +54,27 @@ There are many ways to do this. In the following example we are using ssh and sc
 SSH is required if you want to control all nodes from a single machine.
 
 Enable ssh-agent on your main device that has access to all other nodes in the system:
-
+```
 eval $(ssh-agent)
+```
 Add your SSH identity to the session:
-
+```
 ssh-add ~/.ssh/path_to_private_key
+```
+
 SSH between nodes to check that the connection is working correctly.
 
 When you SSH to any node, make sure to add the -A flag:
-
+```
 ssh -A 10.0.0.7
+```
+
 When using sudo on any node, make sure to preserve the environment so SSH forwarding works:
 
+```
 sudo -E -s
+```
+
 After configuring SSH on all the nodes you should run the following script on the first control plane node after running kubeadm init. This script will copy the certificates from the first control plane node to the other control plane nodes:
 
 In the following example, replace CONTROL_PLANE_IPS with the IP addresses of the other control plane nodes.
