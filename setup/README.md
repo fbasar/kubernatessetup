@@ -221,7 +221,7 @@ data:
 192.168.1.240-192.168.1.250 -> Varolan networkteki ip aralığının girilmesi gerekmektedir.
   
   **8:** Nginx Ingress Yüklemesi
-  
+  ```
   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
-  
+  ```
   nginx ingress yüklemesini yapmak için yukarıdaki işlemlerin yapılması lazım.
