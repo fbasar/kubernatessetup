@@ -209,3 +209,4 @@ data:
       - 192.168.1.240-192.168.1.250
 
 ```
+192.168.1.240-192.168.1.250 -> Varolan networkteki ip aralığının girilmesi gerekmektedir.
