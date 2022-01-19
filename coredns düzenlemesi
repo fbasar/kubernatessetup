@@ -6,6 +6,14 @@ metadata:
   name: kube-dns
   namespace: kube-system
 data:
-  upstreamNameservers: |
+  upstreamNameservers:
     ["8.8.8.8"]
     
+
+
+
+
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -F
