@@ -180,6 +180,8 @@ kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 
 **6:** Eğer node'lar ayaklanmaz ise aşağıdaki kodu çalıştırmak gerekecektir.
 
+  
+  Node lar arası haberleşmeyi kurmak için flannel kullanabilir. Fakat internete çıkışta hata oluşturmaktadır. 
 ```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
 Son versiyonu için 
@@ -187,7 +189,14 @@ Son versiyonu için
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 ```
-
+  
+  Node lar arası haberleşmede calico daha sağlıklı çalışmaktadır. 
+  
+  curl https://docs.projectcalico.org/manifests/calico.yaml -O
+  kubectl apply -f calico.yaml
+  
+  curl https://docs.projectcalico.org/manifests/calico-etcd.yaml -o calico_etcd.yaml
+  kubectl apply -f calico_etcd.yaml
 
 **7:** LoadBalancer için MetalLB'yi kullanacağız
 
