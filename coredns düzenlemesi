@@ -17,3 +17,38 @@ iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
 iptables -F
+
+
+
+.:53 {
+    errors
+    health
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+         pods  insecure
+        upstream
+      fallthrough in-addr.arpa ip6.arpa
+    }
+    prometheus :9153
+    proxy . 8.8.8.8 **other upstream dnsserver**
+    cache 30
+    loop
+    reload
+    loadbalance
+}
+çözmeme rağmen çözdüm ama sanırım ayarladım sorun yok
+
+.:53 {
+    errors
+    health
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+         pods  insecure
+        upstream
+      fallthrough in-addr.arpa ip6.arpa
+    }
+    prometheus :9153
+    proxy . /etc/reslove
+    cache 30
+    loop
+    reload
+    loadbalance
+}
